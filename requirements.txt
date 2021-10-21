@@ -1,0 +1,9 @@
+librosa
+matplotlib
+numpy
+scipy
+torch
+torchaudio
+tqdm
+git+https://github.com/openai/jukebox.git
+git+https://github.com/ethman/sota-music-tagging-models.git
