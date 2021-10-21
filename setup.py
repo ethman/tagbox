@@ -29,7 +29,7 @@ setup(
     long_description_content_type='text/markdown',
     author='Ethan Manilow',
     author_email='',
-    url='https://github.com/ethman/sota-music-tagging-models',
+    url='https://github.com/ethman/tagbox',
     license='MIT',
     packages=find_packages(),
     keywords=['jukebox', 'music tagging', 'VQGAN+CLIP', 'music', 'machine learning'],
