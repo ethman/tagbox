@@ -6,4 +6,4 @@ torch
 torchaudio
 tqdm
 jukebox @ git+https://github.com/openai/jukebox.git
-sota-music-tagging-models @ git+https://github.com/ethman/sota-music-tagging-models.git
+sota_music_taggers @ git+https://github.com/ethman/sota-music-tagging-models.git
