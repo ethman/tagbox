@@ -48,9 +48,9 @@ def audio_for_jbx(audio, trunc_sec=None, device='cuda'):
     return torch.tensor(audio, device=device)[None, :, None]
 
 
-def load_audio_for_jbx(path, trunc_sec=None, device='cuda'):
+def load_audio_for_jbx(path, offset=0.0, dur=None, trunc_sec=None, device='cuda'):
     """Loads a path for use with Jukebox."""
-    audio, sr = librosa.load(path, sr=None)
+    audio, sr = librosa.load(path, sr=None, offset=offset, duration=dur)
 
     if sr != JUKEBOX_SAMPLE_RATE:
         audio = librosa.resample(audio, sr, JUKEBOX_SAMPLE_RATE)
