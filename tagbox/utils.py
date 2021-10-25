@@ -78,7 +78,7 @@ def encode(vqvae, x):
     return xs
 
 
-def decode(vqvae, xs_quantized, level=0):
+def decode(vqvae, xs_quantized, out_level=-1):
     """Decode quantized codes, `xs_quantized` back to audio."""
     # TODO: Don't pass thru all 3 layers, it's hacky! :D
     x_outs = []
@@ -87,9 +87,9 @@ def decode(vqvae, xs_quantized, level=0):
         x_out = decoder(xs_quantized[level:level + 1], all_levels=False)
         x_outs.append(x_out)
 
-    if level is None:
+    if out_level is None:
         return x_outs
-    return x_outs[level]
+    return x_outs[out_level]
 
 
 def make_masked_audio(input_audio, jbx_audio, n_fft):
