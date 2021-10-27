@@ -36,32 +36,20 @@ like source separation.
 Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ethman/tagbox)
 
 
-## Example Output -- Separation
+## Example Output — Separation
 
-#### Smoke On The Water - Deep Purple
+*MUSDB18 and Slakh2100 examples coming soon!*  
 
-**Mixture**
+Audio examples are not displayed on `https://github.com/ethman/tagbox`, please
+click [here](https://ethman.github.io/tagbox/) to see the demo page.
 
-**TagBox Output**
-
-
-| hyperparam      | setting                  |
-|-----------------|--------------------------|
-| fft size(s)     |  512, 1024, 2048         |
-| lr              |  5.0                     |
-| steps           |  200                     |
-| tagger model(s) |  fcn, hcnn               |
-| tagger data     |  MTAT                    |
-| selected tags   |  All vocal tags          |
-
-<audio controls> <source src="examples/smoke_on_the_water/soow_vox.wav" type="audio/wav"> </audio>
-
-#### Wonderwall - Oasis
+### Wonderwall by Oasis - Vocal Separation
 
 **Mixture**
 
 **TagBox Output**
 
+<audio controls> <source src="examples/wonderwall/ww_vox.wav" type="audio/wav"> </audio>
 
 | hyperparam      | setting                  |
 |-----------------|--------------------------|
@@ -72,14 +60,13 @@ Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.go
 | tagger data     |  MTAT                    |
 | selected tags   |  All vocal tags          |
 
-<audio controls> <source src="examples/wonderwall/ww_vox.wav" type="audio/wav"> </audio>
-
-#### Howl's Moving Castle - Piano & Violin Duet
+### Howl's Moving Castle, Piano & Violin Duet - Violin Separation
 
 **Mixture**
 
 **TagBox Output**
 
+<audio controls> <source src="examples/howls_castle/howl_str.wav" type="audio/wav"> </audio>
 
 | hyperparam      | setting                  |
 |-----------------|--------------------------|
@@ -90,8 +77,54 @@ Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.go
 | tagger data     |  MTG-Jamendo             |
 | selected tags   |  Violin                  |
 
-<audio controls> <source src="examples/howls_castle/howl_str.wav" type="audio/wav"> </audio>
+### Smoke On The Water, by Deep Purple - Vocal Separation
 
+**Mixture**
+
+**TagBox Output**
+
+<audio controls> <source src="examples/smoke_on_the_water/soow_vox.wav" type="audio/wav"> </audio>
+
+| hyperparam      | setting                  |
+|-----------------|--------------------------|
+| fft size(s)     |  512, 1024, 2048         |
+| lr              |  5.0                     |
+| steps           |  200                     |
+| tagger model(s) |  fcn, hcnn               |
+| tagger data     |  MTAT                    |
+| selected tags   |  All vocal tags          |
+
+
+## Example Output - Improving Perceptual Output & "Style Transfer"
+
+### Adding multiple FFT sizes helps with perceptual quality
+
+Similar to multi-scale spectral losses, when we use masks with multiple FFT sizes
+we notice that the quality of the output increases.
+
+Notice the warbling effects in the following example:
+
+- `fft_size=[1024]`:
+
+<audio controls> <source src="examples/james_may_broken/jm_ex1.wav" type="audio/wav"> </audio>
+
+
+Those warbling effects are mitigated by using two fft sizes:
+
+- `fft_size=[1024, 2048]`:
+
+<audio controls> <source src="examples/james_may_broken/jm_ex2.wav" type="audio/wav"> </audio>
+
+These results, however, are not reflected in the SDR evaluation metrics.
+
+
+### "Style Transfer"
+
+Remove the masking step enables Jukebox to generate *any* audio that will optimize the
+tag. In some situations, TagBox will pick out the melody and resynthesize it. But
+it adds lots of artifacts, making it sound like the audio was recorded in a snowstorm.
+
+<audio controls> <source src="examples/james_may_dont_look_back/jm_ex3_st.wav" type="audio/wav"> </audio>
 
 ## Cite
 
