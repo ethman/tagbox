@@ -33,6 +33,8 @@ like source separation.
 ## Try it yourself!
 
 
+[Click here to see our Github repository.](https://github.com/ethman/tagbox)
+
 Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ethman/tagbox)
 
 
@@ -51,6 +53,8 @@ TagBox excels in separating prominent melodies from within sparse mixtures.
 **Mixture**
 
 <audio controls> <source src="examples/wonderwall/ww_mix.wav" type="audio/wav"> </audio>
+
+<br>
 
 **TagBox Output**
 
@@ -71,6 +75,8 @@ TagBox excels in separating prominent melodies from within sparse mixtures.
 
 <audio controls> <source src="examples/howls_castle/howl_mix.wav" type="audio/wav"> </audio>
 
+<br>
+
 **TagBox Output**
 
 <audio controls> <source src="examples/howls_castle/howl_str.wav" type="audio/wav"> </audio>
@@ -89,6 +95,8 @@ TagBox excels in separating prominent melodies from within sparse mixtures.
 **Mixture**
 
 <audio controls> <source src="examples/smoke_on_the_water/soow_mix.wav" type="audio/wav"> </audio>
+
+<br>
 
 **TagBox Output**
 
@@ -115,11 +123,15 @@ we notice that the quality of the output increases.
 
 <audio controls> <source src="examples/james_may_broken/jm_mix.wav" type="audio/wav"> </audio>
 
+<br>
+
 **TagBox with `fft_size=[1024]`**
 
 Notice the warbling effects in the following example:
 
 <audio controls> <source src="examples/james_may_broken/jm_ex1.wav" type="audio/wav"> </audio>
+
+<br>
 
 
 **TagBox with `fft_size=[1024, 2048]`**
@@ -141,12 +153,18 @@ it adds lots of artifacts, making it sound like the audio was recorded in a snow
 
 <audio controls> <source src="examples/james_may_dont_look_back/jm_mix.wav" type="audio/wav"> </audio>
 
+<br>
+
 
 **"Style Transfer"**
 
 Here, we optimize the "guitar" tag without the mask. Notice that the "All it
 says to you" melody sounds like a guitar being plucked in a snowstorm:
 <audio controls> <source src="examples/james_may_dont_look_back/jm_ex3_st.wav" type="audio/wav"> </audio>
+
+<br>
+
+<br>
 
 ## Cite
 
