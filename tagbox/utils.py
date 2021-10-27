@@ -78,7 +78,7 @@ def encode(vqvae, x):
     return xs
 
 
-def decode(vqvae, xs_quantized, out_level=-1):
+def decode(vqvae, xs_quantized):
     """Decode quantized codes, `xs_quantized` back to audio."""
     # TODO: Don't pass thru all 3 layers, it's hacky! :D
     x_outs = []
@@ -87,14 +87,14 @@ def decode(vqvae, xs_quantized, out_level=-1):
         x_out = decoder(xs_quantized[level:level + 1], all_levels=False)
         x_outs.append(x_out)
 
-    if out_level is None:
-        return x_outs
-    return x_outs[out_level]
+    return x_outs[0]
 
 
 def make_masked_audio(input_audio, jbx_audio, n_fft):
     """Use Jukebox's audio to mask the input_audio."""
     eps = 1e-8
+    input_audio = input_audio.squeeze()
+    jbx_audio = jbx_audio.squeeze()
 
     window = torch.from_numpy(np.sqrt(scipy.signal.get_window('hann', n_fft)))
     window = window.to(input_audio.device).to(input_audio.dtype)
@@ -103,16 +103,16 @@ def make_masked_audio(input_audio, jbx_audio, n_fft):
                                 window=window,
                                 return_complex=True)
 
-    input_stft = stft(input_audio.squeeze())
+    input_stft = stft(input_audio)
     input_spec, input_phase = torch.abs(input_stft), torch.angle(input_stft)
-    jbx_spec = torch.abs(stft(jbx_audio.squeeze()))
+    jbx_spec = torch.abs(stft(jbx_audio))
     mask = jbx_spec / (torch.maximum(input_spec, jbx_spec) + eps)
 
     masked_spec = mask * input_spec
     masked_stft = masked_spec * torch.exp(1j * input_phase)
     masked_audio = torch.istft(masked_stft, n_fft, hop_length=n_fft // 2,
                                window=window,
-                               length=jbx_audio.shape[-1]).unsqueeze(0)
+                               length=len(input_audio)).unsqueeze(0)
     return masked_audio
 
 

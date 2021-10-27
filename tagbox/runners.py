@@ -6,21 +6,29 @@ from tqdm import trange
 
 from .utils import JUKEBOX_SAMPLE_RATE, TAGGER_SR
 from .utils import setup_jbx, encode, decode, make_masked_audio, to_np
+from .utils import make_labels, load_audio_for_jbx
 
 
 disp = lambda a: float(to_np(a))
 
 
-def run_tagbox(audio, labels, n_steps, step_size, device,
-               model_types, training_data, mask_audio=False, n_fft=None, vqvae=None):
+def run_tagbox(audio_path, source_tags, n_steps, step_size, device,
+               model_types, training_data,
+               mask_audio=False, n_fft=None, offset=0.0, dur=None):
     """Run TagBox on audio file."""
+
+    labels = make_labels(source_tags)
+
+    # Load input audio
+    audio = load_audio_for_jbx(audio_path, device=device,
+                               offset=offset, dur=dur)
     labels = labels.to(device)
 
-    if vqvae is None:
-        vqvae = setup_jbx('5b', device)
+    vqvae = setup_jbx('5b', device)
     vqvae.bottleneck.train()
 
-    resampler = torchaudio.transforms.Resample(JUKEBOX_SAMPLE_RATE, TAGGER_SR).to(device)
+    resampler = torchaudio.transforms.Resample(JUKEBOX_SAMPLE_RATE,
+                                               TAGGER_SR).to(device)
 
     if not isinstance(model_types, list):
         model_types = [model_types]
@@ -38,8 +46,7 @@ def run_tagbox(audio, labels, n_steps, step_size, device,
         elif not isinstance(n_fft, list):
             n_fft = [n_fft]
 
-    audio = vqvae.decode(vqvae.encode(audio))  # pass thru once -> JBX will resize
-    orig_audio = audio.clone()
+    orig_audio = vqvae.decode(vqvae.encode(audio))  # pass thru once -> JBX will resize
 
     encoded_audio = encode(vqvae, audio)
     encoded_audio = [e.detach().requires_grad_(True) for e in encoded_audio]
@@ -90,7 +97,7 @@ def run_tagbox(audio, labels, n_steps, step_size, device,
     if mask_audio:
         jbxd_masked = make_masked_audio(orig_audio, jbxd_audio, fft_size)
         results.update({
-            'jbxd_masked': jbxd_masked,
+            'jbxd_masked': to_np(jbxd_masked),
             'jbxd_diff': to_np(orig_audio) - to_np(jbxd_masked)
         })
 
