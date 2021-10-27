@@ -43,9 +43,14 @@ Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.go
 Audio examples are not displayed on `https://github.com/ethman/tagbox`, please
 click [here](https://ethman.github.io/tagbox/) to see the demo page.
 
+
+TagBox excels in separating prominent melodies from within sparse mixtures.
+
 ### Wonderwall by Oasis - Vocal Separation
 
 **Mixture**
+
+<audio controls> <source src="examples/wonderwall/ww_mix.wav" type="audio/wav"> </audio>
 
 **TagBox Output**
 
@@ -64,6 +69,8 @@ click [here](https://ethman.github.io/tagbox/) to see the demo page.
 
 **Mixture**
 
+<audio controls> <source src="examples/howls_castle/howl_mix.wav" type="audio/wav"> </audio>
+
 **TagBox Output**
 
 <audio controls> <source src="examples/howls_castle/howl_str.wav" type="audio/wav"> </audio>
@@ -80,6 +87,8 @@ click [here](https://ethman.github.io/tagbox/) to see the demo page.
 ### Smoke On The Water, by Deep Purple - Vocal Separation
 
 **Mixture**
+
+<audio controls> <source src="examples/smoke_on_the_water/soow_mix.wav" type="audio/wav"> </audio>
 
 **TagBox Output**
 
@@ -102,16 +111,20 @@ click [here](https://ethman.github.io/tagbox/) to see the demo page.
 Similar to multi-scale spectral losses, when we use masks with multiple FFT sizes
 we notice that the quality of the output increases.
 
-Notice the warbling effects in the following example:
+**Mixture**
 
-- `fft_size=[1024]`:
+<audio controls> <source src="examples/james_may_broken/jm_mix.wav" type="audio/wav"> </audio>
+
+**TagBox with `fft_size=[1024]`**
+
+Notice the warbling effects in the following example:
 
 <audio controls> <source src="examples/james_may_broken/jm_ex1.wav" type="audio/wav"> </audio>
 
 
-Those warbling effects are mitigated by using two fft sizes:
+**TagBox with `fft_size=[1024, 2048]`**
 
-- `fft_size=[1024, 2048]`:
+Those warbling effects are mitigated by using two fft sizes:
 
 <audio controls> <source src="examples/james_may_broken/jm_ex2.wav" type="audio/wav"> </audio>
 
@@ -124,6 +137,14 @@ Remove the masking step enables Jukebox to generate *any* audio that will optimi
 tag. In some situations, TagBox will pick out the melody and resynthesize it. But
 it adds lots of artifacts, making it sound like the audio was recorded in a snowstorm.
 
+**Mixture**
+
+<audio controls> <source src="examples/james_may_dont_look_back/jm_mix.wav" type="audio/wav"> </audio>
+
+
+**"Style Transfer"**
+
+Here, we optimize the "guitar" tag without the mask:
 <audio controls> <source src="examples/james_may_dont_look_back/jm_ex3_st.wav" type="audio/wav"> </audio>
 
 ## Cite
