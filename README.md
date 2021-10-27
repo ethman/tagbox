@@ -144,7 +144,8 @@ it adds lots of artifacts, making it sound like the audio was recorded in a snow
 
 **"Style Transfer"**
 
-Here, we optimize the "guitar" tag without the mask:
+Here, we optimize the "guitar" tag without the mask. Notice that the "All it
+says to you" melody sounds like a guitar being plucked in a snowstorm:
 <audio controls> <source src="examples/james_may_dont_look_back/jm_ex3_st.wav" type="audio/wav"> </audio>
 
 ## Cite
