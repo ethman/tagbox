@@ -30,10 +30,67 @@ untapped potential of large pretrained music models for audio-to-audio tasks
 like source separation. 
 
 
-## Demos
+## Try it yourself!
 
 
-Run it yourself Colab notebook here: [![Open All Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ethman/tagbox)
+Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ethman/tagbox)
+
+
+## Example Output -- Separation
+
+#### Smoke On The Water - Deep Purple
+
+**Mixture**
+
+**TagBox Output**
+
+
+| hyperparam      | setting                  |
+|-----------------|--------------------------|
+| fft size(s)     |  512, 1024, 2048         |
+| lr              |  5.0                     |
+| steps           |  200                     |
+| tagger model(s) |  fcn, hcnn               |
+| tagger data     |  MTAT                    |
+| selected tags   |  All vocal tags          |
+
+<audio controls> <source src="examples/smoke_on_the_water/soow_vox.wav" type="audio/wav"> </audio>
+
+#### Wonderwall - Oasis
+
+**Mixture**
+
+**TagBox Output**
+
+
+| hyperparam      | setting                  |
+|-----------------|--------------------------|
+| fft size(s)     |  512, 1024, 2048         |
+| lr              |  10.0                    |
+| steps           |  200                     |
+| tagger model(s) |  fcn, hcnn, musicnn      |
+| tagger data     |  MTAT                    |
+| selected tags   |  All vocal tags          |
+
+<audio controls> <source src="examples/wonderwall/ww_vox.wav" type="audio/wav"> </audio>
+
+#### Howl's Moving Castle - Piano & Violin Duet
+
+**Mixture**
+
+**TagBox Output**
+
+
+| hyperparam      | setting                  |
+|-----------------|--------------------------|
+| fft size(s)     |  512, 1024, 2048         |
+| lr              |  10.0                    |
+| steps           |  100                     |
+| tagger model(s) |  fcn, hcnn, musicnn      |
+| tagger data     |  MTG-Jamendo             |
+| selected tags   |  Violin                  |
+
+<audio controls> <source src="examples/howls_castle/howl_str.wav" type="audio/wav"> </audio>
 
 
 ## Cite
