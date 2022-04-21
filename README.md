@@ -40,8 +40,6 @@ Run it yourself Colab notebook here: [![Open in Colab](https://colab.research.go
 
 ## Example Output — Separation
 
-*MUSDB18 and Slakh2100 examples coming soon!*  
-
 Audio examples are not displayed on `https://github.com/ethman/tagbox`, please
 click [here](https://ethman.github.io/tagbox/) to see the demo page.
 
